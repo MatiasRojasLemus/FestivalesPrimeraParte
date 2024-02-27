@@ -145,11 +145,40 @@ public class Festival {
 
 
         StringBuilder sb = new StringBuilder();
-        sb.append(getNombre()).append("\t").append(getEstilos());
-        sb.append(getLugar()).append("\t");
+        sb.append(getNombre()).append("\t").append(getEstilos()).append("\n");
+        sb.append(getLugar()).append("\t").append("\n");
+
+
+
+        if (this.getDuracion() == 1){
+            sb.append(this.getFechaInicio()).append("\t");
+        }
+        else {
+            sb.append(this.getFechaInicio()).append("  -  ").append(this.getFechaInicio().plusDays(this.getDuracion()));
+        }
+
+
+
+
+        if (this.haConcluido()){
+            sb.append("(concluido)");
+        }
+        else {
+            if (LocalDate.now().isAfter(this.fechaInicio) && LocalDate.now().isBefore(this.fechaInicio.plusDays(this.duracion))){
+                sb.append("(ON)");
+            }
+            else {
+                LocalDate fechaActual = LocalDate.now();
+                int numeroDiaActual = fechaActual.getDayOfMonth();
+                Month mesActual = fechaActual.getMonth();
+                int anyoActual = fechaActual.getYear();
+                int tiempoTardado = this.getFechaInicio().getDayOfYear() - LocalDate.of(anyoActual,mesActual,numeroDiaActual).getDayOfYear();
+                sb.append("(Quedan ").append(tiempoTardado).append(" dias)");
+            }
+        }
 
         sb.append("------------------------------------------------------------");
-        
+        return sb.toString();
     }
 
     /**
