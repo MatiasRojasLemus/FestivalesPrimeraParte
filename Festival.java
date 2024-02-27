@@ -1,5 +1,7 @@
 
 import java.time.LocalDate;
+import java.time.Month;
+import java.time.chrono.IsoChronology;
 import java.util.HashSet;
 
 /**
@@ -56,13 +58,10 @@ public class Festival {
     /**
      * devuelve el mes de celebración del festival, como
      * valor enumerado
-     *
      */
-    public Mes getMes() {
+    public Month getMes() {
         //TODO
-        
-        return null;
-        
+        return this.fechaInicio.getMonth();
     }
 
     /**
@@ -73,9 +72,7 @@ public class Festival {
      */
     public boolean empiezaAntesQue(Festival otro) {
         //TODO
-        
-        return true;
-        
+        return this.fechaInicio.isBefore(otro.getFechaInicio());
     }
 
     /**
@@ -86,9 +83,7 @@ public class Festival {
      */
     public boolean empiezaDespuesQue(Festival otro) {
         //TODO
-        
-        return true;
-        
+        return this.fechaInicio.isAfter(otro.getFechaInicio());
     }
 
     /**
@@ -97,8 +92,11 @@ public class Festival {
      */
     public boolean haConcluido() {
         //TODO
-        
-        return true;
+        LocalDate fechaActual = LocalDate.now();
+        int numeroDiaActual = fechaActual.getDayOfMonth();
+        Month mesActual = fechaActual.getMonth();
+        int anyoActual = fechaActual.getYear();
+        return this.fechaInicio.plusDays(this.duracion).isAfter(LocalDate.of(anyoActual,mesActual,numeroDiaActual));
 
     }
 
