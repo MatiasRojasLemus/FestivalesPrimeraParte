@@ -20,8 +20,7 @@ public class Festival {
     private final HashSet<Estilo> estilos;
     
     
-    public Festival(String nombre, String lugar, LocalDate fechaInicio,
-                    int duracion, HashSet<Estilo> estilos) {
+    public Festival(String nombre, String lugar, LocalDate fechaInicio, int duracion, HashSet<Estilo> estilos) {
         this.nombre = nombre;
         this.lugar = lugar;
         this.fechaInicio = fechaInicio;
